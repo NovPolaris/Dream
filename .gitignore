@@ -1,5 +1,6 @@
-**/*.iml
+*.iml
 .idea
 .class
 **/*.properties
-**/out
+out
+**/target
