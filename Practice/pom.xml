@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>groupId</groupId>
+    <artifactId>Practice</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <build>
+        <!--默认源代码目录 -->
+        <sourceDirectory>src</sourceDirectory>
+        <outputDirectory>${project.build.directory}/classes
+        </outputDirectory> <!-- ${project.build.directory}就是我们通常看到的target目录 -->
+        <!--默认测试源代码目录 -->
+        <testSourceDirectory>tst</testSourceDirectory>
+        <testOutputDirectory>${project.build.directory}/test-classes
+        </testOutputDirectory>
+        <!--默认资源目录 -->
+        <resources>
+            <resource>
+                <directory>src</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <!--默认测试资源目录 -->
+        <testResources>
+            <testResource>
+                <directory>tst</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </testResource>
+        </testResources>
+
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>3.3.3</version>
+            <type>pom</type>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>3.3.3</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/net.bytebuddy/byte-buddy-dep -->
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-dep</artifactId>
+            <version>1.10.11</version>
+        </dependency>
+
+    </dependencies>
+</project>

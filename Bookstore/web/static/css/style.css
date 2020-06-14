@@ -6,15 +6,12 @@ body {
 
 * {
 	margin: 0;
-	font-family:"Microsoft Yahei";
+	font-family: "Microsoft Yahei", serif;
 	color: #666;
 }
 
 div{
-	margin: auto;
-	margin-bottom: 10px;
-	margin-top: 10px;
-	
+	margin: 10px auto;
 }
 
 #header {
@@ -45,10 +42,8 @@ div{
 .b_list{
 	height:300px;
 	width:250px;
-	margin: 20px;
 	float: left;
-	margin-top:0px;
-	margin-bottom:0px;
+	margin: 0 20px;
 	border: 1px #e3e3e3 solid;
 }
 
@@ -56,7 +51,6 @@ div{
 	width: 100%;
 	height: 10px;
 	margin: auto;
-	
 	text-align: center;
 }
 
@@ -152,8 +146,7 @@ h1 {
 }
 .msg_cont{
 	background: none repeat scroll 0 0 #fff6d2;
-    border: 1px solid #ffe57d;
-    color: #666;
+	color: #666;
     height: 18px;
     line-height: 18px;
     padding: 3px 10px 3px 40px;
@@ -174,9 +167,8 @@ h1 {
 }
 
 .form .itxt {
-    border: 0 none;
-    float: none;
-    font-family: "宋体";
+	float: none;
+	font-family: "宋体", serif;
     font-size: 14px;
     height: 18px;
     line-height: 18px;
@@ -230,8 +222,7 @@ h1 {
 }
 /*购物车*/
 #main table{
-	margin: auto;
-	margin-top: 80px; 
+	margin: 80px auto auto;
 	border-collapse: collapse;
 }
 

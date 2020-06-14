@@ -1,16 +1,19 @@
-drop database if exists book;
+DROP DATABASE IF EXISTS bookstore;
 
-create database book;
+CREATE DATABASE bookstore;
 
-use book;
+USE bookstore;
 
-create table t_user(
-	`id` int primary key auto_increment,
-	`username` varchar(20) not null unique,
-	`password` varchar(32) not null,
-	`email` varchar(200)
+CREATE TABLE t_user
+(
+    id       INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(20) NOT NULL UNIQUE,
+    password VARCHAR(32) NOT NULL,
+    email    VARCHAR(200)
 );
 
-insert into t_user(`username`,`password`,`email`) values('admin','admin','admin@atguigu.com');
+INSERT INTO t_user(username, password, email)
+VALUES ('admin', 'admin', 'admin@atguigu.com');
 
-select * from t_user;
+SELECT *
+FROM t_user;
