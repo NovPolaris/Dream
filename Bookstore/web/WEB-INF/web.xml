@@ -5,12 +5,12 @@
          version="4.0">
 
     <servlet>
-        <servlet-name>RegistServlet</servlet-name>
+        <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>com.puyang.web.RegisterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>RegistServlet</servlet-name>
-        <url-pattern>/registServlet</url-pattern>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/registerServlet</url-pattern>
     </servlet-mapping>
 
     <servlet>
