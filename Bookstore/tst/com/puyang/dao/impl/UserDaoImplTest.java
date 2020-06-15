@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserDaoImplTest {
     public static final String SQL_DELETE = "delete from t_user where username = 'unit_test'";
+    public static final String SQL_DELETE1 = "delete from t_user where username = 'unit_test1'";
+    public static final String SQL_DELETE2 = "delete from t_user where username = 'unit_test2'";
     public static final User USER = User.builder()
             .username("unit_test")
             .password("password")
@@ -37,6 +39,27 @@ class UserDaoImplTest {
         assertNull(userDao.queryUserByUsernameAndPassword("unit_test", "password"));
         userDao.saveUser(USER);
         assertEquals(USER, userDao.queryUserByUsernameAndPassword("unit_test", "password"));
+    }
+
+    @Test
+    public void checkId() {
+        User user1 = User.builder()
+                .username("unit_test1")
+                .password("password")
+                .email("email")
+                .build();
+        User user2 = User.builder()
+                .username("unit_test2")
+                .password("password")
+                .email("email")
+                .build();
+        userDao.saveUser(user1);
+        userDao.saveUser(user2);
+        User actual1 = userDao.queryUserByUsernameAndPassword("unit_test1", "password");
+        User actual2 = userDao.queryUserByUsernameAndPassword("unit_test2", "password");
+        assertNotEquals(actual1.getId(), actual2.getId());
+        baseDao.update(SQL_DELETE1);
+        baseDao.update(SQL_DELETE2);
     }
 
     @AfterEach
