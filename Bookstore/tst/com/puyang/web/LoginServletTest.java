@@ -40,7 +40,7 @@ class LoginServletTest {
     public void shouldGetNull() throws ServletException, IOException {
         when(httpServletRequest.getParameter("username")).thenReturn(USERNAME_NOT_EXIST);
         when(httpServletRequest.getParameter("password")).thenReturn(PASSWORD_NOT_EXIST);
-        when(httpServletRequest.getRequestDispatcher("/pages/user/login.html")).thenReturn(requestDispatcher);
+        when(httpServletRequest.getRequestDispatcher("/pages/user/login.jsp")).thenReturn(requestDispatcher);
         loginServlet.doPost(httpServletRequest, httpServletResponse);
         verify(requestDispatcher).forward(httpServletRequest, httpServletResponse);
     }
@@ -49,7 +49,7 @@ class LoginServletTest {
     public void shouldGetNotNull() throws ServletException, IOException {
         when(httpServletRequest.getParameter("username")).thenReturn(USERNAME_ADMIN);
         when(httpServletRequest.getParameter("password")).thenReturn(PASSWORD_ADMIN);
-        when(httpServletRequest.getRequestDispatcher("/pages/user/login_success.html")).thenReturn(requestDispatcher);
+        when(httpServletRequest.getRequestDispatcher("/pages/user/login_success.jsp")).thenReturn(requestDispatcher);
         loginServlet.doPost(httpServletRequest, httpServletResponse);
         verify(requestDispatcher).forward(httpServletRequest, httpServletResponse);
     }

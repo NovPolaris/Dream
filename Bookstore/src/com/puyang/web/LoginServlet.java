@@ -22,9 +22,9 @@ public class LoginServlet extends HttpServlet {
                 .password(password)
                 .build());
         if (loginUser == null) {
-            req.getRequestDispatcher("/pages/user/login.html").forward(req, resp);
+            req.getRequestDispatcher("/pages/user/login.jsp").forward(req, resp);
         } else {
-            req.getRequestDispatcher("/pages/user/login_success.html").forward(req, resp);
+            req.getRequestDispatcher("/pages/user/login_success.jsp").forward(req, resp);
         }
     }
 }

@@ -3551,7 +3551,7 @@ function returnTrue() {
 }
 
 // jQuery.Event is based on DOM3 Events as specified by the ECMAScript Language Binding
-// http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
+// http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.jsp
 jQuery.Event.prototype = {
 	preventDefault: function() {
 		this.isDefaultPrevented = returnTrue;
@@ -5971,7 +5971,7 @@ jQuery.fn.extend({
 			// this can help fix replacing a parent with child elements
 			if ( jQuery.isFunction( value ) ) {
 				return this.each(function(i) {
-					var self = jQuery(this), old = self.html();
+					var self = jQuery(this), old = self.jsp();
 					self.replaceWith( value.call( this, i, old ) );
 				});
 			}
@@ -6018,7 +6018,7 @@ jQuery.fn.extend({
 		if ( jQuery.isFunction(value) ) {
 			return this.each(function(i) {
 				var self = jQuery(this);
-				args[0] = value.call(this, i, table ? self.html() : undefined);
+				args[0] = value.call(this, i, table ? self.jsp() : undefined);
 				self.domManip( args, table, callback );
 			});
 		}
@@ -7176,7 +7176,7 @@ jQuery.fn.extend({
 						responseText = r;
 					});
 					// See if a selector was specified
-					self.html( selector ?
+					self.jsp( selector ?
 						// Create a dummy div to hold the results
 						jQuery("<div>")
 							// inject the contents of the document in, removing the scripts
