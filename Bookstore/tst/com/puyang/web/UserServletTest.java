@@ -2,6 +2,7 @@ package com.puyang.web;
 
 import com.puyang.dao.impl.BaseDao;
 import com.puyang.dao.impl.UserDaoImpl;
+import com.puyang.utils.WebUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
