@@ -5,25 +5,12 @@ import com.puyang.service.UserService;
 import com.puyang.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
-public class UserServlet extends HttpServlet {
+public class UserServlet extends BaseServlet {
     private final UserService userService = new UserServiceImpl();
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-        try {
-            Method method = UserServlet.class.getDeclaredMethod(req.getParameter("request_type"), HttpServletRequest.class, HttpServletResponse.class);
-            method.invoke(this, req, resp);
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
-    }
 
     private void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
