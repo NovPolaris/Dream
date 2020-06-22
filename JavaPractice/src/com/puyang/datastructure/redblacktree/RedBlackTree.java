@@ -3,15 +3,15 @@ package com.puyang.datastructure.redblacktree;
 import java.util.*;
 
 public class RedBlackTree {
-    private RedBlackNode root;
+    private final RedBlackNode root;
 
-    private int size;
+    private final int size;
 
-    private Iterator<RedBlackNode> iterator;
+    private final Iterator<RedBlackNode> iterator;
 
-    private Iterator<RedBlackNode> begin;
+    private final Iterator<RedBlackNode> begin;
 
-    private Iterator<RedBlackNode> end;
+    private final Iterator<RedBlackNode> end;
 
     public RedBlackTree() {
         this.root = null;

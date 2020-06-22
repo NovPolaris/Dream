@@ -33,6 +33,6 @@ public class RedBlackNode implements Iterator<RedBlackNode> {
 
     private enum RedBlackColor {
         RED,
-        BLACK;
+        BLACK
     }
 }
