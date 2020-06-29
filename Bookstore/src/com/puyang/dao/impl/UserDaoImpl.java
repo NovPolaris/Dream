@@ -1,5 +1,6 @@
 package com.puyang.dao.impl;
 
+import com.puyang.dao.BaseDao;
 import com.puyang.dao.UserDao;
 import com.puyang.pojo.User;
 

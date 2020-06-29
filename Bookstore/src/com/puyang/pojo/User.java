@@ -23,5 +23,5 @@ public class User {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private int id;
+    private Integer id;
 }

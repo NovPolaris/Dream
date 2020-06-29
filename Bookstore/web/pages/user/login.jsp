@@ -24,11 +24,11 @@
                 </div>
                 <div class="msg_cont">
                     <b></b>
-                    <span class="errorMsg"><%=request.getAttribute("errorMsg") == null ? "请输入用户名和密码" : request.getAttribute("errorMsg")%></span>
+                    <span class="errorMsg">${requestScope.get("errorMsg") == null || "".equals(requestScope.get("errorMsg")) ? "请输入用户名和密码" : requestScope.get("errorMsg")}</span>
                 </div>
                 <div class="form">
                     <form action="userServlet" method="post">
-                        <input type="hidden" name="request_type" value="login">
+                        <input type="hidden" name="action" value="login">
                         <label>用户名称：</label>
                         <input class="itxt" type="text" placeholder="请输入用户名"
                                autocomplete="off" tabindex="1" name="username"/>
