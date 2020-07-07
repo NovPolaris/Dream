@@ -13,4 +13,12 @@ public class WebUtils {
         }
         return bean;
     }
+
+    public static int parseInt(String param, int defaultValue) {
+        try {
+            return Integer.parseInt(param);
+        } catch (Exception ex) {
+            return defaultValue;
+        }
+    }
 }

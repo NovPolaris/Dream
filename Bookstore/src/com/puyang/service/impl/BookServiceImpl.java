@@ -3,11 +3,12 @@ package com.puyang.service.impl;
 import com.puyang.dao.BookDao;
 import com.puyang.dao.impl.BookDaoImpl;
 import com.puyang.pojo.Book;
+import com.puyang.pojo.Page;
 import com.puyang.service.BookService;
 
 import java.util.List;
 
-public class BookServiceImpl implements BookService {
+public class  BookServiceImpl implements BookService {
     private final BookDao bookDao = new BookDaoImpl();
 
     @Override
@@ -33,5 +34,10 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> queryBooks() {
         return bookDao.queryBooks();
+    }
+
+    @Override
+    public Page<Book> queryBooksInCurrentPage(int pageNumber, int pageSize) {
+        return bookDao.queryItemsInCurrentPage(pageNumber, pageSize);
     }
 }

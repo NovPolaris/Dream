@@ -3,6 +3,7 @@ package com.puyang.dao.impl;
 import com.puyang.dao.BaseDao;
 import com.puyang.dao.BookDao;
 import com.puyang.pojo.Book;
+import com.puyang.pojo.Page;
 
 import java.util.List;
 
@@ -35,5 +36,32 @@ public class BookDaoImpl extends BaseDao implements BookDao {
     public List<Book> queryBooks() {
         String sql = "select * from t_book";
         return queryForList(Book.class, sql);
+    }
+
+    @Override
+    public long queryForPageTotalCount() {
+        String sql = "select count(*) from t_book";
+        return (Long) queryForSingleValue(sql);
+    }
+
+    @Override
+    public Page<Book> queryItemsInCurrentPage(int pageNumber, int pageSize) {
+        String sql = "select * from t_book limit ?, ?";
+        long count = queryForPageTotalCount();
+        int pageTotal = (int) (count % pageSize == 0 ? count / pageSize : count / pageSize + 1);
+        int curtPage = pageNumber;
+        if (pageNumber < 1) {
+            curtPage = 1;
+        } else if (pageNumber > pageTotal) {
+            curtPage = pageTotal;
+        }
+        List<Book> books = queryForList(Book.class, sql, (curtPage - 1) * pageSize, pageSize);
+        return Page.<Book>builder()
+                .pageTotal(pageTotal)
+                .pageSize(pageSize)
+                .pageNumber(curtPage)
+                .count(count)
+                .items(books)
+                .build();
     }
 }

@@ -11,6 +11,11 @@
             $(".deleteClass").click(function () {
                 return confirm("确认删除【" + $(this).parent().parent().find("td:first").text() + "】吗？");
             });
+            $(".search_page").click(function () {
+                let val = $("#pn_input").val();
+                return val > 0 && val <=
+                ${requestScope.page.pageTotal}
+            })
         });
     </script>
 </head>
@@ -32,15 +37,15 @@
             <td>库存</td>
             <td colspan="2">操作</td>
         </tr>
-        <c:forEach items="${requestScope.books}" var="book">
+        <c:forEach items="${requestScope.page.items}" var="book">
             <tr>
                 <td>${book.name}</td>
                 <td>${book.price}</td>
                 <td>${book.author}</td>
                 <td>${book.sales}</td>
                 <td>${book.stock}</td>
-                <td><a href="manager/bookServlet?action=edit&id=${book.id}">修改</a></td>
-                <td><a class="deleteClass" href="manager/bookServlet?action=delete&id=${book.id}">删除</a></td>
+                <td><a href="manager/bookServlet?action=edit&id=${book.id}&pageNumber=${requestScope.page.pageNumber}">修改</a></td>
+                <td><a class="deleteClass" href="manager/bookServlet?action=delete&id=${book.id}&pageNumber=${requestScope.page.pageNumber}">删除</a></td>
             </tr>
         </c:forEach>
         <tr>
@@ -50,11 +55,10 @@
             <td></td>
             <td></td>
             <td></td>
-            <td><a href="pages/manager/book_edit.jsp">添加图书</a></td>
+            <td><a href="pages/manager/book_edit.jsp?pageNumber=${requestScope.page.pageTotal}">添加图书</a></td>
         </tr>
     </table>
-</div>
-
+    <%@ include file="/pages/common/page_navigation.jsp" %>
 <%@ include file="/pages/common/footer.jsp" %>
 </body>
 </html>

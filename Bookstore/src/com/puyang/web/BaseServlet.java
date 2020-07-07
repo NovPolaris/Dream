@@ -15,7 +15,6 @@ public abstract class BaseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            String action = req.getParameter("action");
             Method method = this.getClass().getDeclaredMethod(req.getParameter("action"), HttpServletRequest.class, HttpServletResponse.class);
             method.setAccessible(true);
             method.invoke(this, req, resp);

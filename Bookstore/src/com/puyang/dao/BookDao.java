@@ -1,6 +1,7 @@
 package com.puyang.dao;
 
 import com.puyang.pojo.Book;
+import com.puyang.pojo.Page;
 
 import java.util.List;
 
@@ -14,4 +15,8 @@ public interface BookDao {
     Book queryBookById(Integer id);
 
     List<Book> queryBooks();
+
+    long queryForPageTotalCount();
+
+    Page<Book> queryItemsInCurrentPage(int pageNumber, int pageSize);
 }

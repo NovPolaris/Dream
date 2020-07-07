@@ -29,8 +29,8 @@
 
 <div id="main">
     <form action="manager/bookServlet">
-
-        <input type="hidden" name="action" value="${empty param["id"] ? "add" : "update"}">
+        <input type="hidden" name="action" value="${empty param.id ? "add" : "update"}">
+        <input type="hidden" name="pageNumber" value="${param.pageNumber}">
         <table>
             <tr>
                 <td>名称</td>
