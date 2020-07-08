@@ -5,6 +5,13 @@
     <meta charset="UTF-8">
     <title>尚硅谷会员登录页面</title>
     <%@ include file="/pages/common/head.jsp" %>
+    <script type="text/javascript">
+        $(function () {
+            $("#code_img").click(function () {
+                this.src = "${basePath}kaptcha.jpg?" + Math.random();
+            });
+        });
+    </script>
 </head>
 <body>
 <div id="login_header">
@@ -37,6 +44,11 @@
                         <label>用户密码：</label>
                         <input class="itxt" type="password" placeholder="请输入密码"
                                autocomplete="off" tabindex="1" name="password"/>
+                        <br/>
+                        <br/>
+                        <label>验证码：</label>
+                        <input class="itxt" type="text" name="code" style="width: 120px;" id="code" />
+                        <img alt="验证码" src="kaptcha.jpg" style="float: right; margin-right: 40px; width: 100px; height: 40px" id="code_img">
                         <br/>
                         <br/>
                         <input type="submit" value="登录" id="sub_btn"/>

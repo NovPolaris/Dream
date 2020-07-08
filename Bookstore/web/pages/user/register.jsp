@@ -41,6 +41,10 @@
                 }
                 $(errorMsg).text("");
             });
+
+            $("#code_img").click(function () {
+                this.src = "${basePath}kaptcha.jpg?" + Math.random();
+            });
         });
 
     </script>
@@ -91,8 +95,8 @@
                         <br/>
                         <br/>
                         <label>验证码：</label>
-                        <input class="itxt" type="text" name="code" style="width: 150px;" id="code" />
-                        <img alt="" src="static/img/code.bmp" style="float: right; margin-right: 40px">
+                        <input class="itxt" type="text" name="code" style="width: 120px;" id="code" />
+                        <img alt="验证码" src="kaptcha.jpg" style="float: right; margin-right: 40px; width: 100px; height: 40px" id="code_img">
                         <br/>
                         <br/>
                         <input type="submit" value="注册" id="sub_btn"/>

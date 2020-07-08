@@ -14,8 +14,10 @@
     <span class="wel_word">网上书城</span>
     <div>
         <c:choose>
-            <c:when test="${sessionScope.user != null}">
-                欢迎<span class="um_span">${sessionScope.user.username}</span>
+            <c:when test="${not empty sessionScope.user}">
+                <span>欢迎<span class="um_span">${sessionScope.user.username}</span>光临尚硅谷书城</span>
+                <a href="pages/order/order.jsp">我的订单</a>
+                <a href="userServlet?action=logout">注销</a>&nbsp;&nbsp;
             </c:when>
             <c:otherwise>
                 <a href="pages/user/login.jsp">登录</a> |

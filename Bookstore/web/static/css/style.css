@@ -117,7 +117,7 @@ div {
 }
 
 .login_form {
-    height: 310px;
+    height: 400px;
     width: 406px;
     float: right;
     margin-right: 50px;
@@ -166,7 +166,7 @@ h1 {
     float: none;
     font-family: "宋体", serif;
     font-size: 14px;
-    height: 18px;
+    height: 30px;
     line-height: 18px;
     overflow: hidden;
     padding: 10px 0 10px 10px;
