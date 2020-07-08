@@ -22,9 +22,10 @@
 <div id="main">
     <div id="book">
         <div class="book_cond">
-            <form action="" method="get">
-                价格：<input id="min" type="text" name="min" value=""> 元 -
-                <input id="max" type="text" name="max" value=""> 元
+            <form action="client/clientServlet" method="get">
+                <input type="hidden" name="action" value="pageByPrice">
+                价格：<input id="min" type="text" name="minValue" value="${requestScope.minValue}"> 元 -
+                <input id="max" type="text" name="maxValue" value="${requestScope.maxValue}"> 元
                 <input type="submit" value="查询"/>
             </form>
         </div>
