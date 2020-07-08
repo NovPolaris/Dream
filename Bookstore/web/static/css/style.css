@@ -20,10 +20,9 @@ div {
 }
 
 #main {
-    height: 550px;
+    height: 500px;
     width: 1200px;
     border: 1px black solid;
-    overflow: auto;
 }
 
 #bottom {
@@ -34,9 +33,8 @@ div {
 
 #book {
     width: 100%;
-    height: 80%;
+    height: 75%;
     margin: auto;
-
 }
 
 .b_list {

@@ -59,6 +59,7 @@
         </tr>
     </table>
     <%@ include file="/pages/common/page_navigation.jsp" %>
+</div>
 <%@ include file="/pages/common/footer.jsp" %>
 </body>
 </html>

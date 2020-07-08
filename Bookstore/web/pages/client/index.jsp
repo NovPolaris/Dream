@@ -13,8 +13,15 @@
     <img class="logo_img" alt="" src="static/img/logo.gif">
     <span class="wel_word">网上书城</span>
     <div>
-        <a href="pages/user/login.jsp">登录</a> |
-        <a href="pages/user/register.jsp">注册</a> &nbsp;&nbsp;
+        <c:choose>
+            <c:when test="${sessionScope.user != null}">
+                欢迎<span class="um_span">${sessionScope.user.username}</span>
+            </c:when>
+            <c:otherwise>
+                <a href="pages/user/login.jsp">登录</a> |
+                <a href="pages/user/register.jsp">注册</a> &nbsp;&nbsp;
+            </c:otherwise>
+        </c:choose>
         <a href="pages/cart/cart.jsp">购物车</a>
         <a href="pages/manager/manager.jsp">后台管理</a>
     </div>

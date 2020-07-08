@@ -72,7 +72,7 @@
                         <input type="hidden" name="action" value="register">
                         <label>用户名称：</label>
                         <input class="itxt" type="text" placeholder="请输入用户名"
-                               autocomplete="off" tabindex="1" name="username" id="username"/>
+                               autocomplete="off" tabindex="1" name="username" id="username" value="${requestScope.username}"/>
                         <br/>
                         <br/>
                         <label>用户密码：</label>
@@ -87,7 +87,7 @@
                         <br/>
                         <label>电子邮件：</label>
                         <input class="itxt" type="text" placeholder="请输入邮箱地址"
-                               autocomplete="off" tabindex="1" name="email" id="email"/>
+                               autocomplete="off" tabindex="1" name="email" id="email" value="${requestScope.email}"/>
                         <br/>
                         <br/>
                         <label>验证码：</label>

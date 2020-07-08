@@ -18,8 +18,10 @@ public class UserServlet extends BaseServlet {
         User loginUser = userService.login(user);
         if (loginUser == null) {
             req.setAttribute("errorMsg", "用户名或密码错误");
+            req.setAttribute("username", user.getUsername());
             req.getRequestDispatcher("/pages/user/login.jsp").forward(req, resp);
         } else {
+            req.getSession().setAttribute("user", user);
             req.getRequestDispatcher("/pages/user/login_success.jsp").forward(req, resp);
         }
     }
@@ -27,17 +29,19 @@ public class UserServlet extends BaseServlet {
     private void register(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String code = req.getParameter("code");
         User user = WebUtils.copyParamsToBean(new User(), req.getParameterMap());
-
+        req.setAttribute("email", user.getEmail());
         if ("abcde".equalsIgnoreCase(code)) {
             if (userService.existsUsername(user.getUsername())) {
                 req.setAttribute("errorMsg", "用户名已存在");
                 req.getRequestDispatcher("/pages/user/register.jsp").forward(req, resp);
             } else {
                 userService.registerUser(user);
+                req.getSession().setAttribute("user", user);
                 req.getRequestDispatcher("/pages/user/register_success.jsp").forward(req, resp);
             }
         } else {
             req.setAttribute("errorMsg", "验证码错误");
+            req.setAttribute("username", user.getUsername());
             req.getRequestDispatcher("/pages/user/register.jsp").forward(req, resp);
         }
     }
