@@ -40,14 +40,14 @@ public class UserServlet extends BaseServlet {
     }
 
     private void register(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String expected = req.getParameter(KAPTCHA_SESSION_KEY);
+        String token = (String) req.getSession().getAttribute(KAPTCHA_SESSION_KEY);
         String code = req.getParameter("code");
         req.getSession().removeAttribute(KAPTCHA_SESSION_KEY);
 
         User user = WebUtils.copyParamsToBean(new User(), req.getParameterMap());
         req.setAttribute("email", user.getEmail());
 
-        if (expected.equalsIgnoreCase(code)) {
+        if (token != null && token.equalsIgnoreCase(code)) {
             if (userService.existsUsername(user.getUsername())) {
                 req.setAttribute("errorMsg", "用户名已存在");
                 req.getRequestDispatcher("/pages/user/register.jsp").forward(req, resp);

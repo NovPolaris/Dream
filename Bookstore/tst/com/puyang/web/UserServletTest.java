@@ -12,10 +12,12 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -26,7 +28,7 @@ class UserServletTest {
     public static final String USERNAME_ADMIN = "admin";
     public static final String PASSWORD_ADMIN = "admin";
     public static final String EMAIL = "email";
-    public static final String CODE = "abcde";
+    public static final String CODE = "code";
     public static final String LOGIN = "login";
     public static final String REGISTER = "register";
     public static final String SQL_DELETE = "delete from t_user where username = 'unit_test'";
@@ -35,13 +37,14 @@ class UserServletTest {
 
     @Mock
     private HttpServletRequest httpServletRequest;
-
     @Mock
     private HttpServletResponse httpServletResponse;
     @Mock
     private RequestDispatcher requestDispatcher;
-    private BaseDao baseDao;
+    @Mock
+    private HttpSession httpSession;
 
+    private BaseDao baseDao;
     private UserServlet userServlet;
 
     @BeforeEach
@@ -52,37 +55,52 @@ class UserServletTest {
 
     @Test
     public void loginShouldGetNull() throws ServletException, IOException {
+        when(httpServletRequest.getSession()).thenReturn(httpSession);
+        when(httpSession.getAttribute(KAPTCHA_SESSION_KEY)).thenReturn(CODE);
+        when(httpServletRequest.getParameter("code")).thenReturn(CODE);
         when(httpServletRequest.getParameter("action")).thenReturn(LOGIN);
         when(httpServletRequest.getParameterMap()).thenReturn(MAP_NOT_EXIST);
         when(httpServletRequest.getRequestDispatcher("/pages/user/login.jsp")).thenReturn(requestDispatcher);
+
         userServlet.doPost(httpServletRequest, httpServletResponse);
         verify(requestDispatcher).forward(httpServletRequest, httpServletResponse);
     }
 
     @Test
     public void loginShouldGetNotNull() throws ServletException, IOException {
+        when(httpServletRequest.getSession()).thenReturn(httpSession);
+        when(httpSession.getAttribute(KAPTCHA_SESSION_KEY)).thenReturn(CODE);
+        when(httpServletRequest.getParameter("code")).thenReturn(CODE);
         when(httpServletRequest.getParameter("action")).thenReturn(LOGIN);
         when(httpServletRequest.getParameterMap()).thenReturn(MAP_EXIST);
         when(httpServletRequest.getRequestDispatcher("/pages/user/login_success.jsp")).thenReturn(requestDispatcher);
+
         userServlet.doPost(httpServletRequest, httpServletResponse);
         verify(requestDispatcher).forward(httpServletRequest, httpServletResponse);
     }
 
     @Test
     public void registerShouldGetNull() throws ServletException, IOException {
+        when(httpServletRequest.getSession()).thenReturn(httpSession);
+        when(httpSession.getAttribute(KAPTCHA_SESSION_KEY)).thenReturn(CODE);
+        when(httpServletRequest.getParameter("code")).thenReturn(CODE);
         when(httpServletRequest.getParameter("action")).thenReturn(REGISTER);
         when(httpServletRequest.getParameterMap()).thenReturn(MAP_EXIST);
         when(httpServletRequest.getRequestDispatcher("/pages/user/register.jsp")).thenReturn(requestDispatcher);
+
         userServlet.doPost(httpServletRequest, httpServletResponse);
         verify(requestDispatcher).forward(httpServletRequest, httpServletResponse);
     }
 
     @Test
     public void registerShouldGetNotNull() throws ServletException, IOException {
-        when(httpServletRequest.getParameter("action")).thenReturn(REGISTER);
+        when(httpServletRequest.getSession()).thenReturn(httpSession);
+        when(httpSession.getAttribute(KAPTCHA_SESSION_KEY)).thenReturn(CODE);
         when(httpServletRequest.getParameter("code")).thenReturn(CODE);
+        when(httpServletRequest.getParameter("action")).thenReturn(REGISTER);
         when(httpServletRequest.getParameterMap()).thenReturn(MAP_NOT_EXIST);
         when(httpServletRequest.getRequestDispatcher("/pages/user/register_success.jsp")).thenReturn(requestDispatcher);
+
         userServlet.doPost(httpServletRequest, httpServletResponse);
         verify(requestDispatcher).forward(httpServletRequest, httpServletResponse);
 
