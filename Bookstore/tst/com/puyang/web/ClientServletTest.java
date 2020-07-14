@@ -17,7 +17,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ClientServletTest {
+public class ClientServletTest {
     public static final String PAGE_NUMBER = "pageNumber";
     public static final String PAGE_SIZE = "pageSize";
     public static final String CLIENT_INDEX_JSP = "/pages/client/index.jsp";

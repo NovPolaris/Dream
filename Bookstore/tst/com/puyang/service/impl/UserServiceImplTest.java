@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class UserServiceImplTest {
+public class UserServiceImplTest {
     public static final String SQL_DELETE = "delete from t_user where username = 'unit_test'";
     public static final User USER = User.builder()
             .username("unit_test")

@@ -25,7 +25,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class BookServletTest {
+public class BookServletTest {
     public static final String PAGE_NUMBER = "pageNumber";
     public static final String CONTEXT_PATH = "ContextPath";
     public static final String PAGE_LIST = "/manager/bookServlet?action=page&pageNumber=";

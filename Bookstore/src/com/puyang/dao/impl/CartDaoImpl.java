@@ -1,11 +1,14 @@
 package com.puyang.dao.impl;
 
+import com.google.common.primitives.Ints;
 import com.puyang.dao.BaseDao;
 import com.puyang.dao.CartDao;
 import com.puyang.pojo.Cart;
 import com.puyang.pojo.CartItem;
+import com.puyang.pojo.Page;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 
 public class CartDaoImpl extends BaseDao implements CartDao {
@@ -52,22 +55,39 @@ public class CartDaoImpl extends BaseDao implements CartDao {
     }
 
     @Override
-    public Cart getCart(String username) {
+    public Cart queryCart(String username) {
         String sql_query = "select * from t_cart where username = ?";
 
         List<CartItem> cartItems = queryForList(CartItem.class, sql_query, username);
 
         if (cartItems == null || cartItems.size() == 0) {
-            return null;
+            return Cart.builder()
+                    .username(username)
+                    .totalCount(0)
+                    .totalPrice(BigDecimal.ZERO)
+                    .items(Collections.emptyList())
+                    .build();
         }
 
         int totalCount = cartItems.stream().mapToInt(CartItem::getCount).sum();
+        BigDecimal totalPrice = cartItems.stream()
+                .map(cartItem -> cartItem.getPrice().multiply(new BigDecimal(cartItem.getCount())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         return Cart.builder()
                 .username(username)
                 .totalCount(totalCount)
-                .totalPrice(cartItems.get(0).getPrice().multiply(new BigDecimal(totalCount)))
+                .totalPrice(totalPrice)
                 .items(cartItems)
                 .build();
+    }
+
+    @Override
+    public long queryForTotalCount(String username) {
+        String sql = "select sum(count) from t_cart where username = ?";
+        if (queryForSingleValue(sql, username) == null) {
+            return 0;
+        }
+        return ((BigDecimal)queryForSingleValue(sql, username)).longValue();
     }
 }

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThrows;
 
-class UserTest extends BaseTestCase {
+public class UserTest extends BaseTestCase {
     @Test
     public void shouldSerializeAndDeserialize() throws JsonProcessingException {
         User user = User.builder()

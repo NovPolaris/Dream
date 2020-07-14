@@ -7,7 +7,7 @@ import java.sql.Connection;
 import static com.puyang.utils.JdbcUtils.close;
 import static org.junit.jupiter.api.Assertions.*;
 
-class JdbcUtilsTest {
+public class JdbcUtilsTest {
     @Test
     void getConnectionAndClose() {
         Connection connection = JdbcUtils.getConnection();

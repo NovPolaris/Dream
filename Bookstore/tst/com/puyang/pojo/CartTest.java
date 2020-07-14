@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.Collections;
 
-class CartTest extends BaseTestCase {
+public class CartTest extends BaseTestCase {
     @Test
     public void shouldSerializeAndDeserialize() throws JsonProcessingException {
         Cart cart = Cart.builder()

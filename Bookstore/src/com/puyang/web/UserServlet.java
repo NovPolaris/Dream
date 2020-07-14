@@ -15,7 +15,7 @@ import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
 public class UserServlet extends BaseServlet {
     private final UserService userService = new UserServiceImpl();
 
-    private void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String token = (String) req.getSession().getAttribute(KAPTCHA_SESSION_KEY);
         String code = req.getParameter("code");
         req.getSession().removeAttribute(KAPTCHA_SESSION_KEY);
@@ -39,7 +39,7 @@ public class UserServlet extends BaseServlet {
         }
     }
 
-    private void register(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void register(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String token = (String) req.getSession().getAttribute(KAPTCHA_SESSION_KEY);
         String code = req.getParameter("code");
         req.getSession().removeAttribute(KAPTCHA_SESSION_KEY);
@@ -63,8 +63,8 @@ public class UserServlet extends BaseServlet {
         }
     }
 
-    private void logout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().removeAttribute("user");
+    protected void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        req.getSession().invalidate();
         resp.sendRedirect(req.getContextPath());
     }
 }

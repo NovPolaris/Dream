@@ -1,9 +1,9 @@
-package com.puyang.dao;
+package com.puyang.service;
 
 import com.puyang.pojo.Cart;
 import com.puyang.pojo.CartItem;
 
-public interface CartDao {
+public interface CartService {
     void addItem(CartItem cartItem, String username);
 
     void deleteItem(String sku, String username);

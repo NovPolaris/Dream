@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-class BookServiceImplTest {
+public class BookServiceImplTest {
     public static final String SQL_SELECT_BY_NAME = "select * from t_book where name = ?";
     public static final String SQL_DELETE_BY_NAME = "delete from t_book where name = ?";
     public static final String NAME = "unit_test";

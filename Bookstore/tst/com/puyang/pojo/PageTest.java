@@ -10,7 +10,7 @@ import java.util.Collections;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThrows;
 
-class PageTest extends BaseTestCase {
+public class PageTest extends BaseTestCase {
     @Test
     public void shouldSerializeAndDeserialize() throws JsonProcessingException, URISyntaxException {
         Page<Book> page = Page.<Book>builder()

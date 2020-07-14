@@ -15,7 +15,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class BaseServletTest {
+public class BaseServletTest {
     private static final String WRONG_CODE = "wrongCode";
     public static final String ACTION = "register";
     public static final String PATH = "/pages/user/register.jsp";

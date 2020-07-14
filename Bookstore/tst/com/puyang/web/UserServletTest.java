@@ -22,15 +22,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class UserServletTest {
+public class UserServletTest {
     public static final String USERNAME_NOT_EXIST = "unit_test";
     public static final String PASSWORD_NOT_EXIST = "password";
     public static final String USERNAME_ADMIN = "admin";
     public static final String PASSWORD_ADMIN = "admin";
     public static final String EMAIL = "email";
     public static final String CODE = "code";
-    public static final String LOGIN = "login";
-    public static final String REGISTER = "register";
+    public static final String CONTEXT_PATH = "contextPath";
     public static final String SQL_DELETE = "delete from t_user where username = 'unit_test'";
     public static final Map<String, String[]> MAP_EXIST = createMap(USERNAME_ADMIN, PASSWORD_ADMIN);
     public static final Map<String, String[]> MAP_NOT_EXIST = createMap(USERNAME_NOT_EXIST, PASSWORD_NOT_EXIST);
@@ -58,11 +57,10 @@ class UserServletTest {
         when(httpServletRequest.getSession()).thenReturn(httpSession);
         when(httpSession.getAttribute(KAPTCHA_SESSION_KEY)).thenReturn(CODE);
         when(httpServletRequest.getParameter("code")).thenReturn(CODE);
-        when(httpServletRequest.getParameter("action")).thenReturn(LOGIN);
         when(httpServletRequest.getParameterMap()).thenReturn(MAP_NOT_EXIST);
         when(httpServletRequest.getRequestDispatcher("/pages/user/login.jsp")).thenReturn(requestDispatcher);
 
-        userServlet.doPost(httpServletRequest, httpServletResponse);
+        userServlet.login(httpServletRequest, httpServletResponse);
         verify(requestDispatcher).forward(httpServletRequest, httpServletResponse);
     }
 
@@ -71,11 +69,10 @@ class UserServletTest {
         when(httpServletRequest.getSession()).thenReturn(httpSession);
         when(httpSession.getAttribute(KAPTCHA_SESSION_KEY)).thenReturn(CODE);
         when(httpServletRequest.getParameter("code")).thenReturn(CODE);
-        when(httpServletRequest.getParameter("action")).thenReturn(LOGIN);
         when(httpServletRequest.getParameterMap()).thenReturn(MAP_EXIST);
         when(httpServletRequest.getRequestDispatcher("/pages/user/login_success.jsp")).thenReturn(requestDispatcher);
 
-        userServlet.doPost(httpServletRequest, httpServletResponse);
+        userServlet.login(httpServletRequest, httpServletResponse);
         verify(requestDispatcher).forward(httpServletRequest, httpServletResponse);
     }
 
@@ -84,11 +81,10 @@ class UserServletTest {
         when(httpServletRequest.getSession()).thenReturn(httpSession);
         when(httpSession.getAttribute(KAPTCHA_SESSION_KEY)).thenReturn(CODE);
         when(httpServletRequest.getParameter("code")).thenReturn(CODE);
-        when(httpServletRequest.getParameter("action")).thenReturn(REGISTER);
         when(httpServletRequest.getParameterMap()).thenReturn(MAP_EXIST);
         when(httpServletRequest.getRequestDispatcher("/pages/user/register.jsp")).thenReturn(requestDispatcher);
 
-        userServlet.doPost(httpServletRequest, httpServletResponse);
+        userServlet.register(httpServletRequest, httpServletResponse);
         verify(requestDispatcher).forward(httpServletRequest, httpServletResponse);
     }
 
@@ -97,14 +93,22 @@ class UserServletTest {
         when(httpServletRequest.getSession()).thenReturn(httpSession);
         when(httpSession.getAttribute(KAPTCHA_SESSION_KEY)).thenReturn(CODE);
         when(httpServletRequest.getParameter("code")).thenReturn(CODE);
-        when(httpServletRequest.getParameter("action")).thenReturn(REGISTER);
         when(httpServletRequest.getParameterMap()).thenReturn(MAP_NOT_EXIST);
         when(httpServletRequest.getRequestDispatcher("/pages/user/register_success.jsp")).thenReturn(requestDispatcher);
 
-        userServlet.doPost(httpServletRequest, httpServletResponse);
+        userServlet.register(httpServletRequest, httpServletResponse);
         verify(requestDispatcher).forward(httpServletRequest, httpServletResponse);
 
         baseDao.update(SQL_DELETE);
+    }
+
+    @Test
+    public void logout() throws IOException {
+        when(httpServletRequest.getContextPath()).thenReturn(CONTEXT_PATH);
+        when(httpServletRequest.getSession()).thenReturn(httpSession);
+        userServlet.logout(httpServletRequest, httpServletResponse);
+        verify(httpSession).invalidate();
+        verify(httpServletResponse).sendRedirect(CONTEXT_PATH);
     }
 
     private static Map<String, String[]> createMap(String username, String password) {

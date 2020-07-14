@@ -1,8 +1,8 @@
-package com.puyang.dao.impl;
+package com.puyang.service.impl;
 
-import com.puyang.dao.CartDao;
 import com.puyang.pojo.Cart;
 import com.puyang.pojo.CartItem;
+import com.puyang.service.CartService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,19 +12,19 @@ import java.math.BigDecimal;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-public class CartDaoImplTest {
+public class CartServiceImplTest {
     public static final String SKU1 = "1";
     public static final String SKU2 = "2";
     public static final String USERNAME = "unit_test";
     public static final String BOOK_NAME1 = "name";
     public static final String BOOK_NAME2 = "name";
 
-    private CartDao cartDao;
+    private CartService cartService;
     private CartItem cartItem;
 
     @BeforeEach
     public void setUp() {
-        cartDao = new CartDaoImpl();
+        cartService = new CartServiceImpl();
         cartItem = CartItem.builder()
                 .sku(SKU1)
                 .count(1)
@@ -32,23 +32,23 @@ public class CartDaoImplTest {
                 .price(BigDecimal.ONE)
                 .totalPrice(BigDecimal.ONE)
                 .build();
-        cartDao.addItem(cartItem, USERNAME);
+        cartService.addItem(cartItem, USERNAME);
     }
 
     @AfterEach
     public void tearDown() {
-        cartDao.clear(USERNAME);
+        cartService.clear(USERNAME);
     }
 
     @Test
     public void addItem() {
-        Cart cart = cartDao.queryCart(USERNAME);
+        Cart cart = cartService.queryCart(USERNAME);
 
         assertEquals(1, cart.getItems().size());
         assertEquals(cartItem, cart.getItems().get(0));
 
-        cartDao.addItem(cartItem, USERNAME);
-        cart = cartDao.queryCart(USERNAME);
+        cartService.addItem(cartItem, USERNAME);
+        cart = cartService.queryCart(USERNAME);
 
         assertEquals(1, cart.getItems().size());
         assertEquals(SKU1, cart.getItems().get(0).getSku());
@@ -58,13 +58,13 @@ public class CartDaoImplTest {
 
     @Test
     public void deleteItem() {
-        Cart cart = cartDao.queryCart(USERNAME);
+        Cart cart = cartService.queryCart(USERNAME);
 
         assertEquals(1, cart.getItems().size());
         assertEquals(cartItem, cart.getItems().get(0));
 
-        cartDao.deleteItem(SKU1, USERNAME);
-        cart = cartDao.queryCart(USERNAME);
+        cartService.deleteItem(SKU1, USERNAME);
+        cart = cartService.queryCart(USERNAME);
 
         assertEquals(0, cart.getItems().size());
         assertEquals(Integer.valueOf(0), cart.getTotalCount());
@@ -79,13 +79,13 @@ public class CartDaoImplTest {
                 .price(BigDecimal.TEN)
                 .totalPrice(BigDecimal.TEN)
                 .build();
-        cartDao.addItem(cartItem1, USERNAME);
-        Cart cart = cartDao.queryCart(USERNAME);
+        cartService.addItem(cartItem1, USERNAME);
+        Cart cart = cartService.queryCart(USERNAME);
 
         assertEquals(2, cart.getItems().size());
 
-        cartDao.clear(USERNAME);
-        cart = cartDao.queryCart(USERNAME);
+        cartService.clear(USERNAME);
+        cart = cartService.queryCart(USERNAME);
 
         assertEquals(0, cart.getItems().size());
         assertEquals(Integer.valueOf(0), cart.getTotalCount());
@@ -93,13 +93,13 @@ public class CartDaoImplTest {
 
     @Test
     public void updateItem() {
-        Cart cart = cartDao.queryCart(USERNAME);
+        Cart cart = cartService.queryCart(USERNAME);
 
         assertEquals(1, cart.getItems().size());
         assertEquals(cartItem, cart.getItems().get(0));
 
-        cartDao.updateItem(SKU1, 10, USERNAME);
-        cart = cartDao.queryCart(USERNAME);
+        cartService.updateItem(SKU1, 10, USERNAME);
+        cart = cartService.queryCart(USERNAME);
 
         assertEquals(1, cart.getItems().size());
         assertEquals(SKU1, cart.getItems().get(0).getSku());
@@ -108,7 +108,7 @@ public class CartDaoImplTest {
 
     @Test
     public void queryForTotalCount() {
-        assertEquals(1, cartDao.queryForTotalCount(USERNAME));
+        assertEquals(1, cartService.queryForTotalCount(USERNAME));
 
         CartItem newItem = CartItem.builder()
                 .sku(SKU2)
@@ -117,8 +117,8 @@ public class CartDaoImplTest {
                 .price(BigDecimal.ONE)
                 .totalPrice(BigDecimal.TEN)
                 .build();
-        cartDao.addItem(newItem, USERNAME);
+        cartService.addItem(newItem, USERNAME);
 
-        assertEquals(11, cartDao.queryForTotalCount(USERNAME));
+        assertEquals(11, cartService.queryForTotalCount(USERNAME));
     }
 }

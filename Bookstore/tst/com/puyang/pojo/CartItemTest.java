@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThrows;
 
-class CartItemTest extends BaseTestCase {
+public class CartItemTest extends BaseTestCase {
     @Test
     public void shouldSerializeAndDeserialize() throws JsonProcessingException {
         CartItem cartItem = CartItem.builder()

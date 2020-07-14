@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThrows;
 
-class BookTest extends BaseTestCase {
+public class BookTest extends BaseTestCase {
     @Test
     public void shouldSerializeAndDeserialize() throws JsonProcessingException {
         Book book = Book.builder()

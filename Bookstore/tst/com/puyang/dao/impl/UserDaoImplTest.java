@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserDaoImplTest {
+public class UserDaoImplTest {
     public static final String SQL_DELETE = "delete from t_user where username = 'unit_test'";
     public static final String SQL_DELETE1 = "delete from t_user where username = 'unit_test1'";
     public static final String SQL_DELETE2 = "delete from t_user where username = 'unit_test2'";

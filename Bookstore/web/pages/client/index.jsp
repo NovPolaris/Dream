@@ -24,7 +24,7 @@
                 <a href="pages/user/register.jsp">注册</a> &nbsp;&nbsp;
             </c:otherwise>
         </c:choose>
-        <a href="pages/cart/cart.jsp">购物车</a>
+        <a href="cartServlet?action=list&username=${sessionScope.user.username}">购物车</a>
         <a href="pages/manager/manager.jsp">后台管理</a>
     </div>
 </div>
@@ -38,12 +38,27 @@
                 <input type="submit" value="查询"/>
             </form>
         </div>
-        <div style="text-align: center">
-            <span>您的购物车中有3件商品</span>
-            <div>
-                您刚刚将<span style="color: red">时间简史</span>加入到了购物车中
+        <c:if test="${not empty sessionScope.operation}">
+            <div style="text-align: center">
+                <span>您的购物车中有${sessionScope.totalCountInCart}件商品</span>
+                <div>
+                    <c:choose>
+                        <c:when test="${sessionScope.operation.equals('add')}">
+                            您刚刚将<span style="color: red">${sessionScope.lastName}</span>加入到了购物车中
+                        </c:when>
+                        <c:when test="${sessionScope.operation.equals('delete')}">
+                            您刚刚将<span style="color: red">${sessionScope.lastName}</span>从购物车中删除
+                        </c:when>
+                        <c:when test="${sessionScope.operation.equals('clear')}">
+                            您刚刚将购物车清空了
+                        </c:when>
+                        <c:otherwise>
+                            您刚刚更新了<span style="color: red">${sessionScope.lastName}</span>的数量
+                        </c:otherwise>
+                    </c:choose>
+                </div>
             </div>
-        </div>
+        </c:if>
         <c:forEach items="${requestScope.page.items}" var="book">
             <div class="b_list">
                 <div class="img_div">
@@ -71,12 +86,18 @@
                         <span class="sp2">${book.stock}</span>
                     </div>
                     <div class="book_add">
-                        <button>加入购物车</button>
+                        <form action="cartServlet" method="get">
+                            <input type="hidden" name="action" value="add">
+                            <input type="hidden" name="id" value="${book.id}">
+                            <button type="submit">加入购物车</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </c:forEach>
     </div>
+    <br>
+    <br>
     <%@ include file="/pages/common/page_navigation.jsp" %>
 </div>
 

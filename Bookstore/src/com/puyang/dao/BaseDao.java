@@ -30,7 +30,7 @@ public abstract class BaseDao {
     public <T> T queryForOne(Class<T> type, String sql, Object... args) {
         Connection con = JdbcUtils.getConnection();
         try {
-            return queryRunner.query(con, sql, new BeanHandler<>(type), args);
+            return queryRunner.query(con, sql, new BeanHandler<>(type, new BasicRowProcessor(new GenerousBeanProcessor())), args);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
