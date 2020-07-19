@@ -2,7 +2,7 @@ package com.puyang.service.impl;
 
 import com.puyang.dao.BaseDao;
 import com.puyang.dao.impl.UserDaoImpl;
-import com.puyang.pojo.User;
+import com.puyang.types.User;
 import com.puyang.service.UserService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

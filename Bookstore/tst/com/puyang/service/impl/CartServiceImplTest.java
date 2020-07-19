@@ -1,7 +1,7 @@
 package com.puyang.service.impl;
 
-import com.puyang.pojo.Cart;
-import com.puyang.pojo.CartItem;
+import com.puyang.types.Cart;
+import com.puyang.types.CartItem;
 import com.puyang.service.CartService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

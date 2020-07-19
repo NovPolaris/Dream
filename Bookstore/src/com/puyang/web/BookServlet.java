@@ -1,7 +1,7 @@
 package com.puyang.web;
 
-import com.puyang.pojo.Book;
-import com.puyang.pojo.Page;
+import com.puyang.types.Book;
+import com.puyang.types.Page;
 import com.puyang.service.BookService;
 import com.puyang.service.impl.BookServiceImpl;
 import com.puyang.utils.WebUtils;

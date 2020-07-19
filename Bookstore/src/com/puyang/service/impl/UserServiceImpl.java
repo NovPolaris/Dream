@@ -2,7 +2,7 @@ package com.puyang.service.impl;
 
 import com.puyang.dao.UserDao;
 import com.puyang.dao.impl.UserDaoImpl;
-import com.puyang.pojo.User;
+import com.puyang.types.User;
 import com.puyang.service.UserService;
 
 public class UserServiceImpl implements UserService {

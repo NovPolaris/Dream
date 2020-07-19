@@ -45,6 +45,17 @@
             $("#code_img").click(function () {
                 this.src = "${basePath}kaptcha.jpg?" + Math.random();
             });
+
+            $("#username").blur(function () {
+                let username = this.value;
+                $.getJSON("${basePath}userServlet", "action=ajaxExistsUsername&username=" + username, function (data) {
+                    if (data.existsUsername) {
+                        $("span.errorMsg").text("用户名已存在！");
+                    } else {
+                        $("span.errorMsg").text("用户名可用！");
+                    }
+                });
+            });
         });
 
     </script>
@@ -76,7 +87,8 @@
                         <input type="hidden" name="action" value="register">
                         <label>用户名称：</label>
                         <input class="itxt" type="text" placeholder="请输入用户名"
-                               autocomplete="off" tabindex="1" name="username" id="username" value="${requestScope.username}"/>
+                               autocomplete="off" tabindex="1" name="username" id="username"
+                               value="${requestScope.username}"/>
                         <br/>
                         <br/>
                         <label>用户密码：</label>
@@ -95,8 +107,9 @@
                         <br/>
                         <br/>
                         <label>验证码：</label>
-                        <input class="itxt" type="text" name="code" style="width: 120px;" id="code" />
-                        <img alt="验证码" src="kaptcha.jpg" style="float: right; margin-right: 40px; width: 100px; height: 40px" id="code_img">
+                        <input class="itxt" type="text" name="code" style="width: 120px;" id="code"/>
+                        <img alt="验证码" src="kaptcha.jpg"
+                             style="float: right; margin-right: 40px; width: 100px; height: 40px" id="code_img">
                         <br/>
                         <br/>
                         <input type="submit" value="注册" id="sub_btn"/>

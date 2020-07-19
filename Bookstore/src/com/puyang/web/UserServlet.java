@@ -1,6 +1,7 @@
 package com.puyang.web;
 
-import com.puyang.pojo.User;
+import com.google.gson.Gson;
+import com.puyang.types.User;
 import com.puyang.service.UserService;
 import com.puyang.service.impl.UserServiceImpl;
 import com.puyang.utils.WebUtils;
@@ -9,6 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
 
@@ -29,7 +32,7 @@ public class UserServlet extends BaseServlet {
                 req.setAttribute("username", user.getUsername());
                 req.getRequestDispatcher("/pages/user/login.jsp").forward(req, resp);
             } else {
-                req.getSession().setAttribute("user", user);
+                req.getSession().setAttribute("user", loginUser);
                 req.getRequestDispatcher("/pages/user/login_success.jsp").forward(req, resp);
             }
         } else {
@@ -66,5 +69,13 @@ public class UserServlet extends BaseServlet {
     protected void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         req.getSession().invalidate();
         resp.sendRedirect(req.getContextPath());
+    }
+
+    protected void ajaxExistsUsername(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String username = req.getParameter("username");
+        Map<String, Object> resultMap = new HashMap<>();
+        boolean existsUsername = userService.existsUsername(username);
+        resultMap.put("existsUsername", existsUsername);
+        resp.getWriter().write(new Gson().toJson(resultMap));
     }
 }

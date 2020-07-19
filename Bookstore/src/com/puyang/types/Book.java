@@ -1,4 +1,4 @@
-package com.puyang.pojo;
+package com.puyang.types;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,8 +7,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.ToString;
-
-import java.math.BigDecimal;
 
 @Data
 @Builder

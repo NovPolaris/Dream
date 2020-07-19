@@ -1,38 +1,36 @@
-package com.puyang.pojo;
+package com.puyang.types;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThrows;
 
-public class BookTest extends BaseTestCase {
+public class CartItemTest extends BaseTestCase {
     @Test
     public void shouldSerializeAndDeserialize() throws JsonProcessingException {
-        Book book = Book.builder()
-                .id(1)
-                .stock(2)
-                .sales(3)
-                .price(4.0)
-                .author("author")
+        CartItem cartItem = CartItem.builder()
+                .sku("1")
                 .name("name")
-                .imgPath("imgPath")
+                .count(2)
+                .price(BigDecimal.TEN)
+                .totalPrice(BigDecimal.valueOf(20))
                 .build();
-        verify(book);
+        verify(cartItem);
     }
 
     @Test
     public void shouldThrowNullPointerException() {
         Exception expected = assertThrows(NullPointerException.class, () -> {
-            Book book = Book.builder()
-                    .id(1)
-                    .stock(2)
-                    .sales(3)
-                    .price(4.0)
+            CartItem cartItem = CartItem.builder()
+                    .sku("1")
                     .name("name")
-                    .imgPath("imgPath")
+                    .count(2)
+                    .totalPrice(BigDecimal.valueOf(20))
                     .build();
-            verify(book);
+            verify(cartItem);
         });
 
         assertNotNull(expected);

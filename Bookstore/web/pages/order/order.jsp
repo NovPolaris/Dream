@@ -17,7 +17,11 @@
 <div id="header">
     <img class="logo_img" alt="" src="static/img/logo.gif">
     <span class="wel_word">我的订单</span>
-    <%@include file="/pages/common/login_success.jsp" %>
+    <div>
+        <span>欢迎<span class="um_span">${sessionScope.user.username}</span>光临尚硅谷书城</span>
+        <a href="userServlet?action=logout">注销</a>&nbsp;&nbsp;
+        <a href="index.jsp">返回</a>
+    </div>
 </div>
 
 <div id="main">

@@ -1,11 +1,9 @@
 package com.puyang.dao.impl;
 
-import com.google.common.primitives.Ints;
 import com.puyang.dao.BaseDao;
 import com.puyang.dao.CartDao;
-import com.puyang.pojo.Cart;
-import com.puyang.pojo.CartItem;
-import com.puyang.pojo.Page;
+import com.puyang.types.Cart;
+import com.puyang.types.CartItem;
 
 import java.math.BigDecimal;
 import java.util.Collections;

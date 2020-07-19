@@ -2,7 +2,7 @@ package com.puyang.web;
 
 import com.puyang.dao.BaseDao;
 import com.puyang.dao.impl.UserDaoImpl;
-import com.puyang.pojo.Book;
+import com.puyang.types.Book;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

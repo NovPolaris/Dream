@@ -1,6 +1,6 @@
 package com.puyang.service;
 
-import com.puyang.pojo.User;
+import com.puyang.types.User;
 
 public interface UserService {
     void registerUser(User user);

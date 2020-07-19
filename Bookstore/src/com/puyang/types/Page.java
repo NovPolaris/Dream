@@ -1,4 +1,4 @@
-package com.puyang.pojo;
+package com.puyang.types;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

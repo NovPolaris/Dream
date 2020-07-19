@@ -2,8 +2,8 @@ package com.puyang.service.impl;
 
 import com.puyang.dao.BookDao;
 import com.puyang.dao.impl.BookDaoImpl;
-import com.puyang.pojo.Book;
-import com.puyang.pojo.Page;
+import com.puyang.types.Book;
+import com.puyang.types.Page;
 import com.puyang.service.BookService;
 
 import java.util.List;

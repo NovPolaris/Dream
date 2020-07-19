@@ -1,8 +1,8 @@
 package com.puyang.dao.impl;
 
 import com.puyang.dao.CartDao;
-import com.puyang.pojo.Cart;
-import com.puyang.pojo.CartItem;
+import com.puyang.types.Cart;
+import com.puyang.types.CartItem;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

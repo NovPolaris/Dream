@@ -1,7 +1,6 @@
-package com.puyang.pojo;
+package com.puyang.types;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertNotNull;

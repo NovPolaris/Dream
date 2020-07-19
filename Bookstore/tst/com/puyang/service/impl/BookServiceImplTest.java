@@ -2,7 +2,7 @@ package com.puyang.service.impl;
 
 import com.puyang.dao.BaseDao;
 import com.puyang.dao.impl.BookDaoImpl;
-import com.puyang.pojo.Book;
+import com.puyang.types.Book;
 import com.puyang.service.BookService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

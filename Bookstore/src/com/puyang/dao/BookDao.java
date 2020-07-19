@@ -1,7 +1,7 @@
 package com.puyang.dao;
 
-import com.puyang.pojo.Book;
-import com.puyang.pojo.Page;
+import com.puyang.types.Book;
+import com.puyang.types.Page;
 
 import java.util.List;
 

@@ -2,8 +2,8 @@ package com.puyang.service.impl;
 
 import com.puyang.dao.CartDao;
 import com.puyang.dao.impl.CartDaoImpl;
-import com.puyang.pojo.Cart;
-import com.puyang.pojo.CartItem;
+import com.puyang.types.Cart;
+import com.puyang.types.CartItem;
 import com.puyang.service.CartService;
 
 public class CartServiceImpl implements CartService {

@@ -1,7 +1,7 @@
 package com.puyang.service;
 
-import com.puyang.pojo.Cart;
-import com.puyang.pojo.CartItem;
+import com.puyang.types.Cart;
+import com.puyang.types.CartItem;
 
 public interface CartService {
     void addItem(CartItem cartItem, String username);

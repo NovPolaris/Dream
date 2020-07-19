@@ -3,8 +3,8 @@ package com.puyang.dao.impl;
 import com.google.common.primitives.Ints;
 import com.puyang.dao.BaseDao;
 import com.puyang.dao.BookDao;
-import com.puyang.pojo.Book;
-import com.puyang.pojo.Page;
+import com.puyang.types.Book;
+import com.puyang.types.Page;
 
 import java.util.List;
 
