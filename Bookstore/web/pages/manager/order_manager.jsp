@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="zh">
@@ -22,26 +23,33 @@
             <td>详情</td>
             <td>发货</td>
         </tr>
-        <tr>
-            <td>2015.04.23</td>
-            <td>90.00</td>
-            <td><a href="#">查看详情</a></td>
-            <td><a href="#">点击发货</a></td>
-        </tr>
-
-        <tr>
-            <td>2015.04.20</td>
-            <td>20.00</td>
-            <td><a href="#">查看详情</a></td>
-            <td>已发货</td>
-        </tr>
-
-        <tr>
-            <td>2014.01.23</td>
-            <td>190.00</td>
-            <td><a href="#">查看详情</a></td>
-            <td>等待收货</td>
-        </tr>
+        <c:forEach items="${requestScope.orders}" var="order">
+            <tr>
+                <td>${order.createTime}</td>
+                <td>${order.price}</td>
+                <td><a href="#">查看详情</a></td>
+                <c:choose>
+                    <c:when test="${'未付款'.equals(order.status.toString())}">
+                        <td>未付款</td>
+                    </c:when>
+                    <c:when test="${'已付款'.equals(order.status.toString())}">
+                        <td>已付款</td>
+                    </c:when>
+                    <c:when test="${'未发货'.equals(order.status.toString())}">
+                        <td><a href="orderServlet?action=shipOrder&orderId=${order.orderId}">点击发货</a></td>
+                    </c:when>
+                    <c:when test="${'已发货'.equals(order.status.toString())}">
+                        <td>已发货</td>
+                    </c:when>
+                    <c:when test="${'未签收'.equals(order.status.toString())}">
+                        <td>未签收</td>
+                    </c:when>
+                    <c:otherwise>
+                        <td>已签收</td>
+                    </c:otherwise>
+                </c:choose>
+            </tr>
+        </c:forEach>
     </table>
 </div>
 

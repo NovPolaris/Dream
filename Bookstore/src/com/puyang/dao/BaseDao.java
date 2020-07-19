@@ -3,6 +3,7 @@ package com.puyang.dao;
 import com.puyang.utils.JdbcUtils;
 import org.apache.commons.dbutils.BasicRowProcessor;
 import org.apache.commons.dbutils.GenerousBeanProcessor;
+import org.apache.commons.dbutils.PropertyHandler;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
@@ -29,6 +30,7 @@ public abstract class BaseDao {
 
     public <T> T queryForOne(Class<T> type, String sql, Object... args) {
         Connection con = JdbcUtils.getConnection();
+
         try {
             return queryRunner.query(con, sql, new BeanHandler<>(type, new BasicRowProcessor(new GenerousBeanProcessor())), args);
         } catch (SQLException e) {
