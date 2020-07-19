@@ -1,13 +1,13 @@
 package com.puyang.web;
 
-import com.puyang.types.Book;
-import com.puyang.types.Cart;
-import com.puyang.types.CartItem;
-import com.puyang.types.User;
 import com.puyang.service.BookService;
 import com.puyang.service.CartService;
 import com.puyang.service.impl.BookServiceImpl;
 import com.puyang.service.impl.CartServiceImpl;
+import com.puyang.types.Book;
+import com.puyang.types.Cart;
+import com.puyang.types.CartItem;
+import com.puyang.types.User;
 import com.puyang.utils.WebUtils;
 
 import javax.servlet.ServletException;
@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.UUID;
 
 public class CartServlet extends BaseServlet {
     private final CartService cartService = new CartServiceImpl();
@@ -48,8 +47,12 @@ public class CartServlet extends BaseServlet {
 
     public void delete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         User user = (User) req.getSession().getAttribute("user");
-        String sku = req.getParameter("sku");
-        cartService.deleteItem(sku, user.getUsername());
+        int bookId = WebUtils.parseInt(req.getParameter("bookId"), -1);
+        if (bookId == -1) {
+            resp.sendRedirect("cartServlet?action=list");
+            return;
+        }
+        cartService.deleteItem(bookId, user.getUsername());
         req.getSession().setAttribute("operation", "delete");
         req.getSession().setAttribute("lastName", req.getParameter("name"));
         req.getSession().setAttribute("totalCountInCart", cartService.queryForTotalCount(user.getUsername()));
@@ -66,9 +69,13 @@ public class CartServlet extends BaseServlet {
 
     public void updateItem(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         User user = (User) req.getSession().getAttribute("user");
-        String sku = req.getParameter("sku");
+        int bookId = WebUtils.parseInt(req.getParameter("bookId"), -1);
+        if (bookId == -1) {
+            resp.sendRedirect("cartServlet?action=list");
+            return;
+        }
         int count = WebUtils.parseInt(req.getParameter("count"), 1);
-        cartService.updateItem(sku, count, user.getUsername());
+        cartService.updateItem(bookId, count, user.getUsername());
         req.getSession().setAttribute("operation", "update");
         req.getSession().setAttribute("lastName", req.getParameter("name"));
         req.getSession().setAttribute("totalCountInCart", cartService.queryForTotalCount(user.getUsername()));
@@ -77,7 +84,7 @@ public class CartServlet extends BaseServlet {
 
     private CartItem helper(Book book) {
         return CartItem.builder()
-                .sku(UUID.nameUUIDFromBytes(book.getName().getBytes()).toString())
+                .bookId(book.getId())
                 .name(book.getName())
                 .count(1)
                 .price(BigDecimal.valueOf(book.getPrice()))

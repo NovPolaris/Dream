@@ -50,7 +50,7 @@ public class BookDaoImplTest {
     @AfterEach
     public void tearDown() {
         baseDao.update(SQL_DELETE_BY_NAME, NAME);
-        JdbcUtils.close(connection, statement, resultSet);
+        close();
     }
 
     @Test
@@ -139,5 +139,30 @@ public class BookDaoImplTest {
         }
 
         assertEquals(books, bookDao.queryItemsInCurrentPage(1, 4).getItems());
+    }
+
+    private void close() {
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (statement != null) {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        JdbcUtils.rollbackAndClose();
     }
 } 

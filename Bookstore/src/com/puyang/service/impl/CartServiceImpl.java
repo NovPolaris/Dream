@@ -15,8 +15,8 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void deleteItem(String sku, String username) {
-        cartDao.deleteItem(sku, username);
+    public void deleteItem(Integer bookId, String username) {
+        cartDao.deleteItem(bookId, username);
     }
 
     @Override
@@ -25,8 +25,8 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void updateItem(String sku, Integer count, String username) {
-        cartDao.updateItem(sku, count, username);
+    public void updateItem(Integer bookId, Integer count, String username) {
+        cartDao.updateItem(bookId, count, username);
     }
 
     @Override

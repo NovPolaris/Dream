@@ -11,6 +11,7 @@ import java.util.Properties;
 public class JdbcUtils {
     private static final String CONFIGURATION_PATH = "jdbc.properties";
     private static final Properties PROPERTIES = new Properties();
+    private static ThreadLocal<Connection> connection = new ThreadLocal<>();
 
     static {
         try {
@@ -23,48 +24,54 @@ public class JdbcUtils {
     }
 
     public static Connection getConnection() {
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection(PROPERTIES.getProperty("url"),
-                    PROPERTIES.getProperty("username"),
-                    PROPERTIES.getProperty("password"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return connection;
-    }
-
-    public static void close(Connection connection) {
-        if (connection != null) {
+        Connection conn = connection.get();
+        if (conn == null) {
             try {
-                connection.close();
+                conn = DriverManager.getConnection(PROPERTIES.getProperty("url"),
+                        PROPERTIES.getProperty("username"),
+                        PROPERTIES.getProperty("password"));
+                connection.set(conn);
+                conn.setAutoCommit(false);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
+        return conn;
     }
 
-    public static void close(Connection connection, Statement statement, ResultSet resultSet) {
-        if (resultSet != null) {
+    public static void commitAndClose() {
+        Connection conn = connection.get();
+        if (conn != null) {
             try {
-                resultSet.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-        if (statement != null) {
-            try {
-                statement.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-        if (connection != null) {
-            try {
-                connection.close();
+                conn.commit();
             } catch (SQLException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
+        connection.remove();
+    }
+
+    public static void rollbackAndClose() {
+        Connection conn = connection.get();
+        if (conn != null) {
+            try {
+                conn.rollback();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        connection.remove();
     }
 }

@@ -20,6 +20,7 @@ public abstract class BaseServlet extends HttpServlet {
             method.invoke(this, req, resp);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }

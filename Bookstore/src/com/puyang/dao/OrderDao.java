@@ -1,20 +1,16 @@
 package com.puyang.dao;
 
 import com.puyang.types.Order;
-import com.puyang.types.OrderItem;
+import com.puyang.types.OrderStatus;
 
 import java.util.List;
 
 public interface OrderDao {
-    void createOrder();
+    void saveOrder(Order order);
 
-    List<Order> showAllOrders();
+    List<Order> queryOrders();
 
-    void shipOrder(Integer orderId);
+    void changeOrderStatus(String orderId, OrderStatus orderStatus);
 
-    List<OrderItem> showOrderDetail(Integer orderId);
-
-    List<Order> showMyOrders(Integer userId);
-
-    void signOrder(Integer orderId);
+    List<Order> queryOrdersByUserId(Integer userId);
 }

@@ -26,14 +26,15 @@ public class CartItem {
     @NonNull
     private Integer count;
 
-    private String sku;
+    private Integer bookId;
 
-//    @EqualsAndHashCode.Include
-//    private BigDecimal equalsPrice() {
-//        return price != null ? price.stripTrailingZeros() : null;
-//    }
-//    @EqualsAndHashCode.Include
-//    private BigDecimal equalsTotalPrice() {
-//        return totalPrice != null ? totalPrice.stripTrailingZeros() : null;
-//    }
+    @EqualsAndHashCode.Include
+    private BigDecimal equalsPrice() {
+        return price != null ? price.stripTrailingZeros() : null;
+    }
+
+    @EqualsAndHashCode.Include
+    private BigDecimal equalsTotalPrice() {
+        return totalPrice != null ? totalPrice.stripTrailingZeros() : null;
+    }
 }

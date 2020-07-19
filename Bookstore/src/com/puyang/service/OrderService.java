@@ -1,20 +1,22 @@
 package com.puyang.service;
 
+import com.puyang.types.Cart;
 import com.puyang.types.Order;
 import com.puyang.types.OrderItem;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface OrderService {
-    void createOrder();
+    String createOrder(Cart cart, Integer userId) throws SQLException;
 
-    List<Order> showAllOrders();
+    List<Order> showAllOrders() throws SQLException;
 
-    void shipOrder(Integer orderId);
+    void shipOrder(String orderId) throws SQLException;
 
-    List<OrderItem> showOrderDetail(Integer orderId);
+    List<OrderItem> showOrderDetail(String orderId) throws SQLException;
 
-    List<Order> showMyOrders(Integer userId);
+    List<Order> showMyOrders(Integer userId) throws SQLException;
 
-    void signOrder(Integer orderId);
+    void signOrder(String orderId) throws SQLException;
 }

@@ -17,10 +17,10 @@
             $(".updateCount").change(function () {
                 let name = $(this).parent().parent().find("td:first").text();
                 let count = $(this).val();
-                let sku = $(this).attr("bookSku");
+                let bookId = $(this).attr("bookId");
                 let boolean = confirm("确定要将【" + name + "】的数量修改成" + count + "吗？");
                 if (boolean) {
-                    location.href = "http://localhost:8080/Bookstore/cartServlet?action=updateItem&count=" + count + "&sku=" + sku + "&name=" + name;
+                    location.href = "http://localhost:8080/Bookstore/cartServlet?action=updateItem&count=" + count + "&bookId=" + bookId + "&name=" + name;
                 } else {
                     $(this).val(this.defaultValue);
                 }
@@ -65,11 +65,11 @@
                     <tr>
                         <td>${item.name}</td>
                         <td>
-                            <input class="updateCount" width="80px" type="text" name="count" bookSku="${item.sku}" value="${item.count}">
+                            <input class="updateCount" width="80px" type="text" name="count" bookId="${item.bookId}" value="${item.count}">
                         </td>
                         <td>${item.price}</td>
                         <td>${item.totalPrice}</td>
-                        <td><a class="deleteItem" href="cartServlet?action=delete&sku=${item.sku}&name=${item.name}">删除</a></td>
+                        <td><a class="deleteItem" href="cartServlet?action=delete&bookId=${item.bookId}&name=${item.name}">删除</a></td>
                     </tr>
                 </c:forEach>
             </table>
@@ -78,7 +78,7 @@
                 <span class="cart_span">购物车中共有<span class="b_count">${requestScope.cart.totalCount}</span>件商品</span>
                 <span class="cart_span">总金额<span class="b_price">${requestScope.cart.totalPrice}</span>元</span>
                 <span class="cart_span"><a class="clearCart" href="cartServlet?action=clear">清空购物车</a></span>
-                <span class="cart_span"><a href="pages/cart/checkout.jsp">去结账</a></span>
+                <span class="cart_span"><a href="orderServlet?action=createOrder">去结账</a></span>
             </div>
         </c:otherwise>
     </c:choose>

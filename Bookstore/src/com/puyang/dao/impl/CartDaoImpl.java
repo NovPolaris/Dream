@@ -12,24 +12,24 @@ import java.util.List;
 public class CartDaoImpl extends BaseDao implements CartDao {
     @Override
     public void addItem(CartItem cartItem, String username) {
-        String sql_query = "select * from t_cart where sku = ? and username = ?";
-        String sql_insert = "insert into t_cart(sku, name, username, count, price, total_price) values (?, ?, ?, ?, ?, ?)";
-        String sql_update = "update t_cart set count = ?, total_price = ? where sku = ? and username = ?";
+        String sql_query = "select * from t_cart where book_id = ? and username = ?";
+        String sql_insert = "insert into t_cart(book_id, name, username, count, price, total_price) values (?, ?, ?, ?, ?, ?)";
+        String sql_update = "update t_cart set count = ?, total_price = ? where book_id = ? and username = ?";
 
-        CartItem item = queryForOne(CartItem.class, sql_query, cartItem.getSku(), username);
+        CartItem item = queryForOne(CartItem.class, sql_query, cartItem.getBookId(), username);
 
         if (item == null) {
-            update(sql_insert, cartItem.getSku(), cartItem.getName(), username, cartItem.getCount(), cartItem.getPrice(), cartItem.getTotalPrice());
+            update(sql_insert, cartItem.getBookId(), cartItem.getName(), username, cartItem.getCount(), cartItem.getPrice(), cartItem.getTotalPrice());
         } else {
             int totalCount = item.getCount() + cartItem.getCount();
-            update(sql_update, totalCount, cartItem.getPrice().multiply(new BigDecimal(totalCount)), cartItem.getSku(), username);
+            update(sql_update, totalCount, cartItem.getPrice().multiply(new BigDecimal(totalCount)), cartItem.getBookId(), username);
         }
     }
 
     @Override
-    public void deleteItem(String sku, String username) {
-        String sql = "delete from t_cart where sku = ? and username = ?";
-        update(sql, sku, username);
+    public void deleteItem(Integer bookId, String username) {
+        String sql = "delete from t_cart where book_id = ? and username = ?";
+        update(sql, bookId, username);
     }
 
     @Override
@@ -39,17 +39,17 @@ public class CartDaoImpl extends BaseDao implements CartDao {
     }
 
     @Override
-    public void updateItem(String sku, Integer count, String username) {
-        String sql_query = "select * from t_cart where sku = ? and username = ?";
-        String sql_update = "update t_cart set count = ?, total_price = ? where sku = ? and username = ?";
+    public void updateItem(Integer bookId, Integer count, String username) {
+        String sql_query = "select * from t_cart where book_id = ? and username = ?";
+        String sql_update = "update t_cart set count = ?, total_price = ? where book_id = ? and username = ?";
 
-        CartItem item = queryForOne(CartItem.class, sql_query, sku, username);
+        CartItem item = queryForOne(CartItem.class, sql_query, bookId, username);
 
         if (item == null) {
             return;
         }
 
-        update(sql_update, count, item.getPrice().multiply(new BigDecimal(count)), sku, username);
+        update(sql_update, count, item.getPrice().multiply(new BigDecimal(count)), bookId, username);
     }
 
     @Override

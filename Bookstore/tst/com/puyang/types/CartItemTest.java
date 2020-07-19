@@ -12,7 +12,7 @@ public class CartItemTest extends BaseTestCase {
     @Test
     public void shouldSerializeAndDeserialize() throws JsonProcessingException {
         CartItem cartItem = CartItem.builder()
-                .sku("1")
+                .bookId(1)
                 .name("name")
                 .count(2)
                 .price(BigDecimal.TEN)
@@ -25,7 +25,7 @@ public class CartItemTest extends BaseTestCase {
     public void shouldThrowNullPointerException() {
         Exception expected = assertThrows(NullPointerException.class, () -> {
             CartItem cartItem = CartItem.builder()
-                    .sku("1")
+                    .bookId(1)
                     .name("name")
                     .count(2)
                     .totalPrice(BigDecimal.valueOf(20))

@@ -4,6 +4,8 @@ import com.puyang.dao.BaseDao;
 import com.puyang.dao.UserDao;
 import com.puyang.types.User;
 
+import java.sql.SQLException;
+
 public class UserDaoImpl extends BaseDao implements UserDao {
     @Override
     public User queryUserByUsername(String username) {
@@ -21,5 +23,11 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     public int saveUser(User user) {
         String sql = "insert into t_user(username, password, email) values(?,?,?)";
         return update(sql, user.getUsername(), user.getPassword(), user.getEmail());
+    }
+
+    @Override
+    public User queryUserByUserId(Integer userId) {
+        String sql = "select * from t_user where id = ?";
+        return queryForOne(User.class, sql, userId);
     }
 }

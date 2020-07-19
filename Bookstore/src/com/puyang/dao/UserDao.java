@@ -8,4 +8,6 @@ public interface UserDao {
     User queryUserByUsernameAndPassword(String username, String password);
 
     int saveUser(User user);
+
+    User queryUserByUserId(Integer userId);
 }

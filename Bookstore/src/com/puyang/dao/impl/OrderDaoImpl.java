@@ -3,43 +3,32 @@ package com.puyang.dao.impl;
 import com.puyang.dao.BaseDao;
 import com.puyang.dao.OrderDao;
 import com.puyang.types.Order;
-import com.puyang.types.OrderItem;
+import com.puyang.types.OrderStatus;
 
 import java.util.List;
 
 public class OrderDaoImpl extends BaseDao implements OrderDao {
     @Override
-    public void createOrder() {
-
+    public void saveOrder(Order order) {
+        String sql = "insert into t_order(order_id, create_time, price, status, user_id) values (?, ?, ?, ?, ?)";
+        update(sql, order.getOrderId(), order.getCreateTime(), order.getPrice(), order.getStatus(), order.getUserId());
     }
 
     @Override
-    public List<Order> showAllOrders() {
+    public List<Order> queryOrders() {
         String sql = "select * from t_order";
         return queryForList(Order.class, sql);
     }
 
     @Override
-    public void shipOrder(Integer orderId) {
-        String sql = "update t_order set status = '已发货' where order_id = ?";
-        update(sql, orderId);
+    public void changeOrderStatus(String orderId, OrderStatus orderStatus) {
+        String sql = "update t_order set status = ? where order_id = ?";
+        update(sql, orderStatus.toString(), orderId);
     }
 
     @Override
-    public List<OrderItem> showOrderDetail(Integer orderId) {
-        String sql = "select * from t_order_item where order_id = ?";
-        return queryForList(OrderItem.class, sql, orderId);
-    }
-
-    @Override
-    public List<Order> showMyOrders(Integer userId) {
+    public List<Order> queryOrdersByUserId(Integer userId) {
         String sql = "select * from t_order where user_id = ?";
         return queryForList(Order.class, sql, userId);
-    }
-
-    @Override
-    public void signOrder(Integer orderId) {
-        String sql = "update t_order set status = '已签收' where order_id = ?";
-        update(sql, orderId);
     }
 }
