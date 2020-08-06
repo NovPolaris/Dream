@@ -28,6 +28,11 @@ public class UserDaoImplTest {
         userDao = new UserDaoImpl();
     }
 
+    @AfterEach
+    public void tearDown() {
+        baseDao.update(SQL_DELETE);
+    }
+
     @Test
     public void queryUserByUsername() {
         assertNull(userDao.queryUserByUsername("unit_test"));
@@ -63,8 +68,12 @@ public class UserDaoImplTest {
         baseDao.update(SQL_DELETE2);
     }
 
-    @AfterEach
-    public void tearDown() {
-        baseDao.update(SQL_DELETE);
+    @Test
+    public void queryUserById() {
+        userDao.saveUser(USER);
+        String sql = "select id from t_user where username = 'unit_test'";
+        int userId = (Integer) baseDao.queryForSingleValue(sql);
+        User actualUser = userDao.queryUserByUserId(userId);
+        assertEquals(USER, actualUser);
     }
 }

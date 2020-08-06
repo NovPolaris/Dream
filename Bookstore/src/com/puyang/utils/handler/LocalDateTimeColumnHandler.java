@@ -15,6 +15,6 @@ public class LocalDateTimeColumnHandler implements ColumnHandler {
 
     @Override
     public Object apply(ResultSet rs, int columnIndex) throws SQLException {
-        return rs.getTimestamp(columnIndex).toInstant().atZone(ZoneId.of("UTC")).toLocalDateTime();
+        return rs.getTimestamp(columnIndex).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 }

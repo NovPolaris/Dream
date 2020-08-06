@@ -3,6 +3,7 @@ package com.puyang.types;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
@@ -15,13 +16,20 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Order {
     @NonNull
-    private String orderId;
-    @NonNull
-    private LocalDateTime createTime;
-    @NonNull
+    @EqualsAndHashCode.Exclude
     private BigDecimal price;
+
+    @NonNull
+    private String orderId;
     @NonNull
     private OrderStatus status;
     @NonNull
     private Integer userId;
+    @NonNull
+    private LocalDateTime createTime;
+
+    @EqualsAndHashCode.Include
+    private BigDecimal equalsPrice() {
+        return price != null ? price.stripTrailingZeros() : null;
+    }
 }

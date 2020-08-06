@@ -3,15 +3,13 @@ package com.puyang.utils;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Properties;
 
 public class JdbcUtils {
-    private static final String CONFIGURATION_PATH = "jdbc.properties";
+    private static final String CONFIGURATION_PATH = "configuration/property/jdbc.properties";
     private static final Properties PROPERTIES = new Properties();
-    private static ThreadLocal<Connection> connection = new ThreadLocal<>();
+    private static final ThreadLocal<Connection> connection = new ThreadLocal<>();
 
     static {
         try {

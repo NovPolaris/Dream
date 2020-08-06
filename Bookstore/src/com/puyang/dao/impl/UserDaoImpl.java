@@ -4,8 +4,6 @@ import com.puyang.dao.BaseDao;
 import com.puyang.dao.UserDao;
 import com.puyang.types.User;
 
-import java.sql.SQLException;
-
 public class UserDaoImpl extends BaseDao implements UserDao {
     @Override
     public User queryUserByUsername(String username) {

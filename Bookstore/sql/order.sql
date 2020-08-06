@@ -30,5 +30,8 @@ VALUES (1234567895, '2020-05-23', 10.00, '已签收', 137);
 INSERT INTO t_order (order_id, create_time, price, status, user_id)
 VALUES (1234567896, '2020-05-23', 10.00, '未签收', 137);
 
+ALTER TABLE t_order
+    CHANGE status status VARCHAR(50) CHARACTER SET utf8;
+
 SELECT *
 FROM t_order;

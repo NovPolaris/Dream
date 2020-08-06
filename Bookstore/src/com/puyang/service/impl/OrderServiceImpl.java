@@ -18,7 +18,6 @@ import com.puyang.types.Order;
 import com.puyang.types.OrderItem;
 import com.puyang.types.OrderStatus;
 
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -32,7 +31,13 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public String createOrder(Cart cart, Integer userId) {
         String orderId = generateOrderId(userId);
-        Order order = new Order(orderId, LocalDateTime.now(), cart.getTotalPrice(), OrderStatus.未付款, userId);
+        Order order = Order.builder()
+                .createTime(LocalDateTime.now().withNano(0))
+                .price(cart.getTotalPrice())
+                .status(OrderStatus.未付款)
+                .userId(userId)
+                .orderId(orderId)
+                .build();
         orderDao.saveOrder(order);
 
         saveOrderItems(cart, orderId);

@@ -14,10 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -42,6 +44,8 @@ public class UserServletTest {
     private RequestDispatcher requestDispatcher;
     @Mock
     private HttpSession httpSession;
+    @Mock
+    private PrintWriter printWriter;
 
     private BaseDao baseDao;
     private UserServlet userServlet;
@@ -109,6 +113,14 @@ public class UserServletTest {
         userServlet.logout(httpServletRequest, httpServletResponse);
         verify(httpSession).invalidate();
         verify(httpServletResponse).sendRedirect(CONTEXT_PATH);
+    }
+
+    @Test
+    public void ajaxExistsUsername() throws IOException {
+        when(httpServletResponse.getWriter()).thenReturn(printWriter);
+        userServlet.ajaxExistsUsername(httpServletRequest, httpServletResponse);
+        verify(httpServletResponse).getWriter();
+        verify(printWriter).write(any(String.class));
     }
 
     private static Map<String, String[]> createMap(String username, String password) {
